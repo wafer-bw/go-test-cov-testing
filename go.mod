@@ -1,4 +1,4 @@
-module github.com/wafer-bw/gocovtesting
+module github.com/wafer-bw/go-test-cov-testing
 
 go 1.17
 
