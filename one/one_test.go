@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"github.com/wafer-bw/gocovtesting/three"
+	"github.com/wafer-bw/go-test-cov-testing/three"
 )
 
 func TestOne(t *testing.T) {
