@@ -14,8 +14,8 @@ The main flaw is that packages/files with no test file are not counted as 0% cov
 The goal is to find a coverage method that meets the following
 - calculates coverage for files with no `*_test.go` file as 0%
 - does not perform any cross-package/cross-module coverage counting
-- does not artificially raise package/total coverage
-- does not artificially lower package/total coverage
+- does not artificially raise statement/package/total coverage
+- does not artificially lower statement/package/total coverage
 
 The actual coverage of the packages in this repo should be reported as
 ```sh
@@ -64,3 +64,22 @@ go tool cover -func=coverage.out
     - `package one` @ 66.7% should be 100%
 - :x: artificially raises total coverage
     - total should be ~33.3%
+
+## Adding empty test files
+If we add empty test files to packages two and three the results will be accurate
+```sh
+go test -coverprofile=coverage.out ./...
+# ok      github.com/wafer-bw/go-test-cov-testing/one     0.150s  coverage: 100.0% of statements
+# ok      github.com/wafer-bw/go-test-cov-testing/three   0.197s  coverage: 0.0% of statements [no tests to run]
+# ok      github.com/wafer-bw/go-test-cov-testing/two     0.105s  coverage: 0.0% of statements [no tests to run]
+go tool cover -func=coverage.out
+# github.com/wafer-bw/go-test-cov-testing/one/one.go:4:           One             100.0%
+# github.com/wafer-bw/go-test-cov-testing/three/three.go:4:       Three           0.0%
+# github.com/wafer-bw/go-test-cov-testing/two/two.go:4:           Two             0.0%
+# total:                                                          (statements)    33.3%
+```
+
+- :white_check_mark: accurately covers files with no `*_test.go`
+- :white_check_mark: does not introduce cross-package coverage
+- :white_check_mark: does not artificially raise statement/package/total coverage
+- :white_check_mark: does not artificially lower statement/package/total coverage
