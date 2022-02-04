@@ -10,7 +10,7 @@
 There is currently an issue tracked in the golang project [here](https://github.com/golang/go/issues/24570) that, if fixed, would resolve this issue.
 The main flaw is that packages/files with no test file are not counted as 0% coverage. There is also a stack overflow question [here](https://stackoverflow.com/questions/59903169/go-wrong-coverage-when-there-is-no-tests-for-a-package). The currently available solutions are empty test files or `coverpkg=./...`.
 
-## This repo
+## About this repo
 The goal is to find a coverage method that meets the following
 - calculates coverage for files with no `*_test.go` file as 0%
 - does not perform any cross-package/cross-module coverage counting
@@ -24,8 +24,10 @@ The actual coverage of the packages in this repo should be reported as
 # github.com/wafer-bw/go-test-cov-testing/two/two.go:3:          Two             0.0%
 # total:                                                  (statements)    33.3%
 ```
+## Options
+The various methods of calculating coverage
 
-## (Option 1) `go test -coverprofile=coverage.out ./...` with no empty `_test.go` files
+### (Option 1) `go test -coverprofile=coverage.out ./...` with no empty `_test.go` files
 ```sh
 go test -coverprofile=coverage.out ./...
 # ok      github.com/wafer-bw/go-test-cov-testing/one    0.123s  coverage: 100.0% of statements
@@ -43,7 +45,7 @@ go tool cover -func=coverage.out
 - :x: artificially raises total coverage
     - total should be ~33.3%
 
-## (Option 2) `go test -coverpkg=./... -coverprofile=coverage.out ./...`
+### (Option 2) `go test -coverpkg=./... -coverprofile=coverage.out ./...`
 ```sh
 go test -coverpkg=./... -coverprofile=coverage.out ./...
 # ok      github.com/wafer-bw/go-test-cov-testing/one    0.281s  coverage: 66.7% of statements in ./...
@@ -65,7 +67,7 @@ go tool cover -func=coverage.out
 - :x: artificially raises total coverage
     - total should be ~33.3%
 
-## (Option 3) `go test -coverprofile=coverage.out ./...` with empty `_test.go` files
+### (Option 3) `go test -coverprofile=coverage.out ./...` with empty `_test.go` files
 If we add empty test files to packages two and three the results will be accurate. A commit for this repo demonstrating this can be reviewed [here](https://github.com/wafer-bw/go-test-cov-testing/tree/a60ccfe77b03554ca4f13047434ae8973d8995e8). Every package we want to include in the coverage total must have at least one `_test.go` file to be considered in the total.
 ```sh
 go test -coverprofile=coverage.out ./...
