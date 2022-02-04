@@ -38,7 +38,7 @@ go tool cover -func=coverage.out
 # total:                                          (statements)    100.0%
 ```
 
-- :x: does not calculate coverage for files with no `*_test.go` file
+- :x: does not calculate coverage for packages with no `*_test.go` file
     - `two.go`, `three.go`
 - :white_check_mark: does not perform any cross-package coverage
     - `one_test.go` tests `three.go` but does not cover it
@@ -81,7 +81,8 @@ go tool cover -func=coverage.out
 # total:                                                          (statements)    33.3%
 ```
 
-- :x: covers files with no `*_test.go`
+- :x: does not calculate coverage for packages with no `*_test.go` file
+    - `two.go`, `three.go`
 - :white_check_mark: does not introduce cross-package coverage
 - :white_check_mark: does not artificially raise statement/package/total coverage
 - :white_check_mark: does not artificially lower statement/package/total coverage
