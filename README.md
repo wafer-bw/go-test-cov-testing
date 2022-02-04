@@ -66,7 +66,7 @@ go tool cover -func=coverage.out
     - total should be ~33.3%
 
 ## Adding empty test files
-If we add empty test files to packages two and three the results will be accurate
+If we add empty test files to packages two and three the results will be accurate. A commit for this repo demonstrating this can be reviewed [here](https://github.com/wafer-bw/go-test-cov-testing/tree/a60ccfe77b03554ca4f13047434ae8973d8995e8)
 ```sh
 go test -coverprofile=coverage.out ./...
 # ok      github.com/wafer-bw/go-test-cov-testing/one     0.150s  coverage: 100.0% of statements
