@@ -6,6 +6,11 @@
 [![Coverage Status](https://coveralls.io/repos/github/wafer-bw/go-test-cov-testing/badge.svg)](https://coveralls.io/github/wafer-bw/go-test-cov-testing)
 [![Go Reference](https://pkg.go.dev/badge/github.com/wafer-bw/go-test-cov-testing.svg)](https://pkg.go.dev/github.com/wafer-bw/go-test-cov-testing)
 
+## Golang issue
+There is currently an issue tracked in the golang project [here](https://github.com/golang/go/issues/24570) that, if fixed, would resolve this issue.
+The main flaw is that packages/files with no test file are not counted as 0% coverage. There is also a stack overflow question [here](https://stackoverflow.com/questions/59903169/go-wrong-coverage-when-there-is-no-tests-for-a-package). The currently available solutions are empty test files or `coverpkg=./...`.
+
+## This repo
 The goal is to find a coverage method that meets the following
 - calculates coverage for files with no `*_test.go` file as 0%
 - does not perform any cross-package/cross-module coverage counting
