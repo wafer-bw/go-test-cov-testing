@@ -82,7 +82,6 @@ go tool cover -func=coverage.out
 ```
 
 - :x: does not calculate coverage for packages with no `*_test.go` file
-    - `two.go`, `three.go`
 - :white_check_mark: does not introduce cross-package coverage
 - :white_check_mark: does not artificially raise statement/package/total coverage
 - :white_check_mark: does not artificially lower statement/package/total coverage
